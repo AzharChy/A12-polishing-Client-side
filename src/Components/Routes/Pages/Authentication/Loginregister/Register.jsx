@@ -1,43 +1,36 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import useAuth from '../../../../../customHooks/useAuth';
-import { useLocation, useNavigate } from 'react-router-dom';
+ 
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import useAxios from '../../../../../customHooks/useAxios';
-import Swal from 'sweetalert2';
 
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
+import useAuth from '../../../../../customHooks/useAuth';
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors }
-  } = useForm();
-
-  const { createUser } = useAuth();
-  const axiosInstance = useAxios();
-
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const {  createUser } = useAuth();
   const [profilePic, setProfilePic] = useState('');
+  const axiosInstance = useAxiosSecure();
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || '/';
 
   const onSubmit = async (data) => {
     try {
-      // Step 1: Create Firebase user
+      // 1. Create user with Firebase
       const result = await createUser(data.email, data.password);
       console.log('Firebase user created:', result.user);
-      Swal.fire("Registraion Successful!!!")
 
-      // Step 2: Update Firebase profile
-    //   await updateUserProfile({
-    //     displayName: data.name,
-    //     photoURL: profilePic
-    //   });
+      // 2. Upload image already done before submission
+      // await updateUserProfile({
+      //   displayName: data.name,
+      //   photoURL: profilePic
+      // });
 
-      // Step 3: Store user in database
+      // 3. Save user to MongoDB
       const userInfo = {
         name: data.name,
         email: data.email,
@@ -47,14 +40,16 @@ const Register = () => {
         last_log_in: new Date().toISOString()
       };
 
-      const res = await axiosInstance.post('/users', userInfo);
+      const res = await axiosInstance.post('/users', userInfo, { withCredentials: true });
       console.log('Saved to DB:', res.data);
 
-      // Step 4: Navigate to original page
+      // 4. Navigate
+      Swal.fire('Registration Successful!');
       navigate(from, { replace: true });
 
-    } catch (error) {
-      console.error('Registration error:', error);
+    } catch (err) {
+      console.error('Registration error:', err);
+      Swal.fire('Error', err.message, 'error');
     }
   };
 
@@ -62,7 +57,6 @@ const Register = () => {
     const image = e.target.files[0];
     const formData = new FormData();
     formData.append('image', image);
-
     try {
       const uploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
       const res = await axios.post(uploadUrl, formData);
@@ -82,7 +76,6 @@ const Register = () => {
       <h2 className="text-2xl font-semibold mb-4">Register</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
         {/* Name */}
         <div>
           <label className="block mb-1">Full Name</label>
@@ -94,7 +87,7 @@ const Register = () => {
           {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
         </div>
 
-        {/* Image Upload */}
+        {/* Profile Picture */}
         <div>
           <label className="block mb-1">Profile Picture</label>
           <input
@@ -151,6 +144,8 @@ const Register = () => {
         >
           Register
         </button>
+
+        <p className="text-sm mt-3">Already have an account? <Link to="/login" className="text-violet-600 underline">Login</Link></p>
       </form>
     </div>
   );

@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../customHooks/useAuth';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../customHooks/AxiosSecure';
+
+
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const [dbUser, setDbUser] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {user, logout} = useAuth();
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const handleLogout = () =>{
-    logout()
-    .then((res)=>{
-        console.log(res);
-        Swal.fire("SweetAlert2 is working!");
+  // Fetch user from your backend
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure.get(`/users?email=${user.email}`)
+        .then(res => {
+          setDbUser(res.data);
+        })
+        .catch(err => {
+          console.error('Error fetching user from DB:', err);
+        });
+    }
+  }, [user, axiosSecure]);
+
+ const handleLogout = () => {
+  logOut()
+    .then(() => {
+      Swal.fire('Logged out successfully!');
+      navigate('/login'); // Redirect to login page
     })
-    .catch((err)=>{
-        console.log(err);
-    })
-  }
+    .catch((err) => {
+      console.log('Logout error:', err);
+    });
+};
+
 
   const links = (
     <>
@@ -34,27 +55,48 @@ const Navbar = () => {
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2 text-xl font-bold text-violet-600">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-8 h-8">
-            <path d="M27.912 7.289l-10.324-5.961c-0.455-0.268-1.002-0.425-1.588-0.425s-1.133 0.158-1.604 0.433l0.015-0.008-10.324 5.961c-0.955 0.561-1.586 1.582-1.588 2.75v11.922c0.002 1.168 0.635 2.189 1.574 2.742l0.016 0.008 10.322 5.961c0.455 0.267 1.004 0.425 1.59 0.425 0.584 0 1.131-0.158 1.602-0.433l-0.014 0.008 10.322-5.961c0.955-0.561 1.586-1.582 1.588-2.75v-11.922c-0.002-1.168-0.633-2.189-1.573-2.742z"></path>
+            <path d="M27.912 7.289l-10.324-5.961..." />
           </svg>
           InsuranceApp
         </NavLink>
 
-        {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-4 items-center">
-          {links}
-        </ul>
+        {/* Desktop Links */}
+        <ul className="hidden lg:flex space-x-4 items-center">{links}</ul>
 
-        {/* Auth Buttons */}
-        <div className="hidden lg:flex items-center gap-2">
-          <Link to='login'>
-          <button className="px-4 py-2 text-sm rounded border">Login</button>
-          </Link>
-          <Link to='register'>
-          <button className="px-4 py-2 text-sm font-semibold rounded bg-violet-600 text-white">Register</button>
-          </Link>
+        {/* User / Auth Buttons */}
+        <div className="hidden lg:flex items-center gap-3 relative">
+          {user ? (
+            <div className="relative">
+              <img
+                src={dbUser?.photo || '/default-profile.png'}
+                alt="Profile"
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="w-10 h-10 rounded-full border-2 cursor-pointer"
+              />
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 p-4">
+                  <p className="text-sm font-medium">{dbUser?.name || 'Unnamed User'}</p>
+                  <p className="text-xs text-gray-500">{dbUser?.email}</p>
+                  <hr className="my-2" />
+                  <button onClick={handleLogout} className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900 rounded">
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <Link to="/login">
+                <button className="px-4 py-2 text-sm rounded border">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="px-4 py-2 text-sm font-semibold rounded bg-violet-600 text-white">Register</button>
+              </Link>
+            </>
+          )}
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Icon */}
         <div className="lg:hidden">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
@@ -64,17 +106,38 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       {isMenuOpen && (
         <div className="lg:hidden mt-2 space-y-2 px-4 py-2 bg-white dark:bg-gray-800 shadow rounded-md">
           <ul className="space-y-2">{links}</ul>
           <div className="pt-2 flex flex-col gap-2">
-              <Link to='login'>
-          <button className="px-4 py-2 text-sm rounded border">Login</button>
-          </Link>
-          <Link to='register'>
-          <button className="px-4 py-2 text-sm font-semibold rounded bg-violet-600 text-white">Register</button>
-          </Link>
+            {user ? (
+              <>
+                <div className="flex items-center gap-2">
+                  <img
+                    src={dbUser?.photo || '/default-profile.png'}
+                    alt="profile"
+                    className="w-10 h-10 rounded-full border-2"
+                  />
+                  <div>
+                    <p className="text-sm font-medium">{dbUser?.name}</p>
+                    <p className="text-xs text-gray-500">{dbUser?.email}</p>
+                  </div>
+                </div>
+                <button onClick={handleLogout} className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-100 dark:hover:bg-red-900 rounded">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <button className="px-4 py-2 text-sm rounded border">Login</button>
+                </Link>
+                <Link to="/register">
+                  <button className="px-4 py-2 text-sm font-semibold rounded bg-violet-600 text-white">Register</button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-// import useAuth from '../../../../../customHooks/useAuth';
+import useAuth from '../../../../../customHooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import useAuth from '../../../../../customHooks/useAuth';
+import { getAuth } from 'firebase/auth';
+import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
+
 
 const Login = () => {
   const {
@@ -13,26 +15,44 @@ const Login = () => {
     formState: { errors }
   } = useForm();
 
-  const { signIn } = useAuth();
+  const { signIn, signInWithGoogle } = useAuth();
+  const axiosSecure = useAxiosSecure(); // should support withCredentials
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
   const [loginError, setLoginError] = useState('');
 
-  const onSubmit = data => {
+  const onSubmit = async (data) => {
     setLoginError('');
-    signIn(data.email, data.password)
-      .then(result => {
-        console.log(result.user);
-        Swal.fire("Login Successful!");
-        navigate(from);
-      })
-      .catch(error => {
-        console.log(error);
-        setLoginError(error.message);
-      });
+    try {
+      // Step 1: Firebase login
+      const result = await signIn(data.email, data.password);
+      console.log('Firebase user:', result.user);
+
+      // Step 2: Get ID token
+      const auth = getAuth();
+      const idToken = await auth.currentUser.getIdToken();
+
+      // Step 3: Send token to backend to set JWT cookie
+      await axiosSecure.post('/jwt', { idToken });
+
+      Swal.fire("Login Successful!");
+      navigate(from);
+    } catch (error) {
+      console.error(error);
+      setLoginError(error.message);
+    }
   };
+
+  const googleSignIn= () =>{
+       signInWithGoogle()
+       .then((res)=>{
+        const googleUser = res.user;
+        Swal.fire("Login Successful!!");
+        navigate(from)
+       })
+  }
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
@@ -80,6 +100,9 @@ const Login = () => {
           Login
         </button>
       </form>
+      <div className='m-auto p-5 text-center'>
+        <button onClick={googleSignIn} className='px-8 py-3 font-semibold rounded dark:bg-gray-800 dark:text-gray-100 '>Sign In With Google</button>
+      </div>
     </div>
   );
 };
