@@ -1,11 +1,12 @@
+
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router";
+} from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="text-center text-red-500">Hello World</div>,
+    element: <div className="text-red-500">Hello World</div>,
   },
 ]);
