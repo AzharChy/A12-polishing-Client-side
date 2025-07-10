@@ -10,6 +10,7 @@ import Agents from "./Pages/Agents/Agents";
 import Faq from "./Pages/FAQ/Faq";
 import Login from "./Pages/Authentication/Loginregister/Login";
 import Register from "./Pages/Authentication/Loginregister/Register";
+import PolicyDetails from "./Pages/AllPolicies/PolicyDetails";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: 'register',
         Component: Register
+      },
+      {
+        path: '/policy/:id',
+        Component: PolicyDetails
       }
     ]
   },
