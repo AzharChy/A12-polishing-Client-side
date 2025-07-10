@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
 
 const Quotes = () => {
-    const policyId = useParams();
+    const {policyId }= useParams();
     
   const { state } = useLocation();
   const navigate = useNavigate();
