@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
 
 const Quotes = () => {
+    const policyId = useParams();
+    
   const { state } = useLocation();
   const navigate = useNavigate();
   const policyName = state?.policyName || 'Unknown Policy';
   const baseRate = state?.baseRate || 15;
-
+  const axiosSecure = useAxiosSecure();
   const [formData, setFormData] = useState({
     age: '',
     gender: '',
@@ -48,15 +51,35 @@ const Quotes = () => {
     setQuote({ monthly: monthly.toFixed(2), annual: annual.toFixed(2) });
   };
 
-  const handleApply = () => {
-    navigate('/apply', {
+  const handleApply = async () => {
+  const quoteData = {
+    policyId,
+    policyName,
+    ...formData,
+    monthlyPremium: quote.monthly,
+    annualPremium: quote.annual,
+    createdAt: new Date()
+  };
+
+  try {
+    const res = await axiosSecure.post('/quotes', quoteData);
+    console.log("Quote saved:", res.data);
+    
+    navigate(`/apply/${res.data.insertedId
+}`, {
       state: {
+        policyId,
         policyName,
         formData,
         quote
       }
     });
-  };
+  } catch (error) {
+    console.error('Quote submission error:', error);
+  }
+};
+
+
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow mt-8 rounded">
@@ -99,6 +122,13 @@ const Quotes = () => {
 
         <button type="submit" className="w-full bg-violet-600 text-white py-2 rounded hover:bg-violet-700">Get Premium Estimate</button>
       </form>
+
+      {quote === null && (
+  <p className="text-sm text-gray-500 mt-2 text-center">
+    Click "Get Premium Estimate" to calculate based on new input.
+  </p>
+)}
+
 
       {quote && (
         <div className="mt-6 border-t pt-4">

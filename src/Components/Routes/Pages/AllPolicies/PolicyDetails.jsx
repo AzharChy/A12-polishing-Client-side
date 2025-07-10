@@ -48,7 +48,7 @@ const PolicyDetails = () => {
 
           <div className="mt-6 flex gap-4">
             <button
-              onClick={() => navigate('/get-quote', {
+              onClick={() => navigate(`/get-quote/${policy._id}`, {
                  state: {
     policyId: policy._id,
     policyName: policy.title,
