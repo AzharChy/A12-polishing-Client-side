@@ -48,7 +48,13 @@ const PolicyDetails = () => {
 
           <div className="mt-6 flex gap-4">
             <button
-              onClick={() => navigate('/get-quote')}
+              onClick={() => navigate('/get-quote', {
+                 state: {
+    policyId: policy._id,
+    policyName: policy.title,
+    baseRate: 15, // you can pass a base premium or logic multiplier if needed
+  }
+              })}
               className="bg-violet-600 text-white px-6 py-2 rounded hover:bg-violet-700 transition"
             >
               Get Quote

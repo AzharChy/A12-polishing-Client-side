@@ -11,6 +11,7 @@ import Faq from "./Pages/FAQ/Faq";
 import Login from "./Pages/Authentication/Loginregister/Login";
 import Register from "./Pages/Authentication/Loginregister/Register";
 import PolicyDetails from "./Pages/AllPolicies/PolicyDetails";
+import Quotes from "./Pages/AllPolicies/Quotes/Quoters";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/policy/:id',
         Component: PolicyDetails
+      },
+      {
+        path: 'get-quote',
+        element: <Quotes></Quotes>
       }
     ]
   },
