@@ -13,6 +13,7 @@ import Register from "./Pages/Authentication/Loginregister/Register";
 import PolicyDetails from "./Pages/AllPolicies/PolicyDetails";
 import Quotes from "./Pages/AllPolicies/Quotes/Quoters";
 import Apply from "./Pages/AllPolicies/Apply Page/Apply";
+import PrivateRoute from "./Pages/Authentication/AuthProvider/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,9 @@ export const router = createBrowserRouter([
       },
       {
           path: 'agents',
-          element: <Agents></Agents>
+          element: <PrivateRoute>
+            <Agents></Agents>
+          </PrivateRoute>
       },
       {
         path: 'FAQ',
@@ -53,7 +56,9 @@ export const router = createBrowserRouter([
       },
       {
         path: 'apply/:quoteId',
-        element: <Apply></Apply>
+        element: <PrivateRoute>
+           <Apply></Apply>
+        </PrivateRoute>
       }
     ]
   },
