@@ -45,7 +45,9 @@ const Navbar = () => {
       <li><NavLink to="/allPolicy" className="px-4 py-2 rounded hover:bg-violet-100">All Policies</NavLink></li>
       <li><NavLink to="/agents" className="px-4 py-2 rounded hover:bg-violet-100">Agents</NavLink></li>
       <li><NavLink to="/FAQ" className="px-4 py-2 rounded hover:bg-violet-100">FAQ</NavLink></li>
+   {user && 
       <li><NavLink to="/dashboard" className="px-4 py-2 rounded hover:bg-violet-100">Dashboard</NavLink></li>
+      }
     </>
   );
 

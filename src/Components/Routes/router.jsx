@@ -14,6 +14,8 @@ import PolicyDetails from "./Pages/AllPolicies/PolicyDetails";
 import Quotes from "./Pages/AllPolicies/Quotes/Quoters";
 import Apply from "./Pages/AllPolicies/Apply Page/Apply";
 import PrivateRoute from "./Pages/Authentication/AuthProvider/PrivateRoute";
+import DashboardHome from "./Pages/Dashboard/DashboardLayout/DAshboard Pages/DashboardHome";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -52,7 +54,9 @@ export const router = createBrowserRouter([
       },
       {
         path: 'get-quote/:policyId',
-        element: <Quotes></Quotes>
+        element: <PrivateRoute>
+          <Quotes></Quotes>
+        </PrivateRoute>
       },
       {
         path: 'apply/:quoteId',
@@ -63,6 +67,16 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path: 'dashboard',
+     path: '/dashboard',
+  element: 
+  <PrivateRoute>
+    <Dashboard />,
+    // </PrivateRoute>,
+  children: [
+    {
+      index: true, 
+      element: <DashboardHome />
+    },
+    ]
   }
 ]);
