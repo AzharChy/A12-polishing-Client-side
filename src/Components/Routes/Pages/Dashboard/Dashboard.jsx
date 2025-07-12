@@ -34,6 +34,12 @@ const Dashboard = () => {
         >
           Manage Applications
         </NavLink>
+        <NavLink
+          to="/dashboard/manageUSers"
+          className="block py-2 px-4 rounded hover:bg-violet-600"
+        >
+          Manage Users
+        </NavLink>
       </aside>
 
       {/* Overlay for small devices */}

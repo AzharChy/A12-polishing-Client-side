@@ -18,6 +18,7 @@ import DashboardHome from "./Pages/Dashboard/DashboardLayout/DAshboard Pages/Das
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import AdminRoute from "./Pages/Dashboard/Admin and agent route/AdminRoute";
 import ManageApplication from "./Pages/Dashboard/Admin Paths/ManageApplication";
+import ManageUsers from "./Pages/Dashboard/Admin Paths/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -85,6 +86,12 @@ export const router = createBrowserRouter([
        <AdminRoute>
         <ManageApplication></ManageApplication>
        </AdminRoute>
+    },
+    {
+      path: 'manageUSers',
+      element: <AdminRoute>
+        <ManageUsers />
+      </AdminRoute>
     }
     ]
   }
