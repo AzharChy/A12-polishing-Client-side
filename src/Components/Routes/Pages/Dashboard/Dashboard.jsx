@@ -40,6 +40,27 @@ const Dashboard = () => {
         >
           Manage Users
         </NavLink>
+        <NavLink
+          to="/dashboard/managePolicies"
+          className="block py-2 px-4 rounded hover:bg-violet-600"
+        >
+          Manage Policies
+        </NavLink>
+        <NavLink
+          to="/dashboard/manageTransactions"
+          className="block py-2 px-4 rounded hover:bg-violet-600"
+        >
+          Manage Transactions
+        </NavLink>
+        <a
+  href="/dashboard/manageAgents"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block py-2 px-4 rounded hover:bg-violet-600"
+>
+  Manage Agents
+</a>
+
       </aside>
 
       {/* Overlay for small devices */}

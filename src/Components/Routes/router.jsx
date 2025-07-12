@@ -19,6 +19,10 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import AdminRoute from "./Pages/Dashboard/Admin and agent route/AdminRoute";
 import ManageApplication from "./Pages/Dashboard/Admin Paths/ManageApplication";
 import ManageUsers from "./Pages/Dashboard/Admin Paths/ManageUsers";
+import ManagePolicies from "./Pages/Dashboard/Admin Paths/ManagePolicies";
+import AddPolices from "./Pages/Dashboard/Admin Paths/AddPolicies";
+import ManageAgents from "./Pages/Dashboard/Admin Paths/ManageAgents";
+import ManageTransactions from "./Pages/Dashboard/Admin Paths/ManageTransactions";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +95,30 @@ export const router = createBrowserRouter([
       path: 'manageUSers',
       element: <AdminRoute>
         <ManageUsers />
+      </AdminRoute>
+    },
+    {
+      path:'managePolicies',
+    element: <AdminRoute>
+      <ManagePolicies />
+    </AdminRoute>
+    },
+    {
+      path: 'addPolicies',
+      element: <AdminRoute>
+        <AddPolices />
+      </AdminRoute>
+    },
+    {
+      path: 'manageAgents',
+      element: <AdminRoute>
+        <ManageAgents />
+      </AdminRoute>
+    },
+    {
+      path: 'manageTransactions',
+      element: <AdminRoute>
+        <ManageTransactions />
       </AdminRoute>
     }
     ]
