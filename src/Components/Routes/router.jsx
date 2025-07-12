@@ -16,6 +16,8 @@ import Apply from "./Pages/AllPolicies/Apply Page/Apply";
 import PrivateRoute from "./Pages/Authentication/AuthProvider/PrivateRoute";
 import DashboardHome from "./Pages/Dashboard/DashboardLayout/DAshboard Pages/DashboardHome";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import AdminRoute from "./Pages/Dashboard/Admin and agent route/AdminRoute";
+import ManageApplication from "./Pages/Dashboard/Admin Paths/ManageApplication";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +79,13 @@ export const router = createBrowserRouter([
       index: true, 
       element: <DashboardHome />
     },
+    {
+      path: 'applications',
+      element:
+       <AdminRoute>
+        <ManageApplication></ManageApplication>
+       </AdminRoute>
+    }
     ]
   }
 ]);
