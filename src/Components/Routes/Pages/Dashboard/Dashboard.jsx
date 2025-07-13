@@ -3,10 +3,17 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FiMenu } from 'react-icons/fi';
 import Navbar from '../../../sharedFiles/Navbar';
+// import useUserRole from '../../../../customHooks/UserRole';
+import Loading from '../Loading';
+
+import AdminSidebar from './sidebar';
+
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // const { role, isLoading } = useUserRole();
 
+    // if (isLoading) return <Loading></Loading>
   // Close sidebar on overlay click
   const handleOverlayClick = () => {
     if (isOpen) setIsOpen(false);
@@ -28,38 +35,8 @@ const Dashboard = () => {
         <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">
           Home
         </NavLink>
-        <NavLink
-          to="/dashboard/applications"
-          className="block py-2 px-4 rounded hover:bg-violet-600"
-        >
-          Manage Applications
-        </NavLink>
-        <NavLink
-          to="/dashboard/manageUSers"
-          className="block py-2 px-4 rounded hover:bg-violet-600"
-        >
-          Manage Users
-        </NavLink>
-        <NavLink
-          to="/dashboard/managePolicies"
-          className="block py-2 px-4 rounded hover:bg-violet-600"
-        >
-          Manage Policies
-        </NavLink>
-        <NavLink
-          to="/dashboard/manageTransactions"
-          className="block py-2 px-4 rounded hover:bg-violet-600"
-        >
-          Manage Transactions
-        </NavLink>
-        <a
-  href="/dashboard/manageAgents"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="block py-2 px-4 rounded hover:bg-violet-600"
->
-  Manage Agents
-</a>
+
+      <AdminSidebar></AdminSidebar>
 
       </aside>
 

@@ -1,4 +1,4 @@
-import { Tab } from '@headlessui/react';
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { Helmet } from 'react-helmet-async';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -61,8 +61,8 @@ const ManageAgents = () => {
       </Helmet>
       <h2 className="text-2xl font-bold mb-6 text-center">Manage Agents</h2>
 
-      <Tab.Group>
-        <Tab.List className="flex space-x-4 mb-4">
+      <TabGroup>
+        <TabList className="flex space-x-4 mb-4">
           {['Pending Applications', 'All Current Agents'].map((tab) => (
             <Tab
               key={tab}
@@ -75,11 +75,11 @@ const ManageAgents = () => {
               {tab}
             </Tab>
           ))}
-        </Tab.List>
+        </TabList>
 
-        <Tab.Panels>
+        <TabPanels>
           {/* Pending Applications */}
-          <Tab.Panel>
+          <TabPanel>
             <div className="overflow-x-auto rounded shadow">
               {pendingAgents.length === 0 ? (
                 <p className="text-center text-gray-500">No pending applications</p>
@@ -123,10 +123,10 @@ const ManageAgents = () => {
                 </table>
               )}
             </div>
-          </Tab.Panel>
+          </TabPanel>
 
           {/* Current Agents */}
-          <Tab.Panel>
+          <TabPanel>
             <div className="overflow-x-auto rounded shadow">
               {currentAgents.length === 0 ? (
                 <p className="text-center text-gray-500">No active agents</p>
@@ -162,9 +162,9 @@ const ManageAgents = () => {
                 </table>
               )}
             </div>
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+          </TabPanel>
+        </TabPanels>
+      </TabGroup>
     </div>
   );
 };
