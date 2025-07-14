@@ -3,17 +3,19 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { FiMenu } from 'react-icons/fi';
 import Navbar from '../../../sharedFiles/Navbar';
-// import useUserRole from '../../../../customHooks/UserRole';
+
 import Loading from '../Loading';
 
 import AdminSidebar from './sidebar';
+import AgentSidebar from './AgentSidebar';
+import useUserRole from '../../../../customHooks/UserRole';
 
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const { role, isLoading } = useUserRole();
+  const { role, isLoading } = useUserRole();
 
-    // if (isLoading) return <Loading></Loading>
+    if (isLoading) return <Loading></Loading>
   // Close sidebar on overlay click
   const handleOverlayClick = () => {
     if (isOpen) setIsOpen(false);
@@ -37,6 +39,7 @@ const Dashboard = () => {
         </NavLink>
 
       <AdminSidebar></AdminSidebar>
+      <AgentSidebar />
 
       </aside>
 

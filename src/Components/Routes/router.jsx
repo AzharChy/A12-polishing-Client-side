@@ -23,6 +23,10 @@ import ManagePolicies from "./Pages/Dashboard/Admin Paths/ManagePolicies";
 import AddPolices from "./Pages/Dashboard/Admin Paths/AddPolicies";
 import ManageAgents from "./Pages/Dashboard/Admin Paths/ManageAgents";
 import ManageTransactions from "./Pages/Dashboard/Admin Paths/ManageTransactions";
+import AgentRoute from "./Pages/Dashboard/Admin and agent route/AgentRoute";
+import AssignedCustomers from "./Pages/Dashboard/Agent Paths/AssignedCustomers";
+import PostBlogs from "./Pages/Dashboard/Agent Paths/PostBlogs";
+import ManageBlogs from "./Pages/Dashboard/Agent Paths/ManageBlogs";
 
 export const router = createBrowserRouter([
   {
@@ -120,7 +124,25 @@ export const router = createBrowserRouter([
       element: <AdminRoute>
         <ManageTransactions />
       </AdminRoute>
-    }
+    },
+    {
+      path: 'assignedCustomers',
+      element: <AgentRoute>
+        <AssignedCustomers />
+      </AgentRoute>
+    },
+    {
+      path: 'postBlogs',
+      element: <AgentRoute>
+       <PostBlogs />
+      </AgentRoute>
+    },
+    {
+      path: 'manageBlogs',
+      element: <AgentRoute>
+      <ManageBlogs />
+      </AgentRoute>
+    },
     ]
   }
 ]);

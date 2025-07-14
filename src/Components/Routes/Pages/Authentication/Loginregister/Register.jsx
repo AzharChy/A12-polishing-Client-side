@@ -24,12 +24,7 @@ const Register = () => {
       const result = await createUser(data.email, data.password);
       console.log('Firebase user created:', result.user);
 
-      // 2. Upload image already done before submission
-      // await updateUserProfile({
-      //   displayName: data.name,
-      //   photoURL: profilePic
-      // });
-
+     
       // 3. Save user to MongoDB
       const userInfo = {
         name: data.name,
@@ -39,6 +34,9 @@ const Register = () => {
         created_at: new Date().toISOString(),
         last_log_in: new Date().toISOString()
       };
+
+      console.log('Sending to DB:', userInfo);
+
 
       const res = await axiosInstance.post('/users', userInfo, { withCredentials: true });
       console.log('Saved to DB:', res.data);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useUserRole from '../../../../customHooks/UserRole';
+// import AgentSidebar from './AgentSidebar';
 
 const AdminSidebar = () => {
   const { role, isLoading } = useUserRole();
@@ -41,8 +42,13 @@ const AdminSidebar = () => {
           >
             Manage Transactions
           </NavLink>
+
+            
+                    
+         
         </>
       )}
+     
     </div>
   );
 };

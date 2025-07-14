@@ -3,12 +3,7 @@ import {  GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, si
 
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../../../../dist/Firebase/firebase.config';
-
-
-
-
-
+import { auth } from '../../../../../firebase.config';
 
 
 const googleProvider = new GoogleAuthProvider();

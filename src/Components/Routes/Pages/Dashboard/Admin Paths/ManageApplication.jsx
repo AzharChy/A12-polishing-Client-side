@@ -33,6 +33,7 @@ const ManageApplication = () => {
       refetch();
       Swal.fire('Success', `Application ${status}`, 'success');
     } catch (err) {
+      console.log(err)
       Swal.fire('Error', 'Something went wrong', 'error');
     }
   };

@@ -4,8 +4,9 @@ import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../../../customHooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { getAuth } from 'firebase/auth';
+
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
+import { auth } from '../../../../../firebase.config';
 
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
   } = useForm();
 
   const { signIn, signInWithGoogle } = useAuth();
-  const axiosSecure = useAxiosSecure(); // should support withCredentials
+  const axiosSecure = useAxiosSecure(); 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -30,11 +31,10 @@ const Login = () => {
       const result = await signIn(data.email, data.password);
       console.log('Firebase user:', result.user);
 
-      // Step 2: Get ID token
-      const auth = getAuth();
+    
       const idToken = await auth.currentUser.getIdToken();
 
-      // Step 3: Send token to backend to set JWT cookie
+     
       await axiosSecure.post('/jwt', { idToken });
 
       Swal.fire("Login Successful!");
