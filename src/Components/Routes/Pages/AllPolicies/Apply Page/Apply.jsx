@@ -27,7 +27,7 @@ const Apply = () => {
 
   const [formData, setFormData] = useState({
     fullName: '',
-    email:'user.email',
+    email:'',
     address: '',
     phone: '',
     nid:'',
@@ -54,6 +54,7 @@ const Apply = () => {
          paymentStatus: 'not paid yet',
          
       });
+      console.log(updateQuote,user)
 
       // 2. Increase totalCount in related policy
      await axiosSecure.patch(`/policies/increment/${quote.policyId}`);
@@ -98,7 +99,7 @@ const Apply = () => {
           type="email"
           name="email"
           placeholder="Email Address"
-          value={user.email}
+          value={formData.email}
           onChange={handleChange}
           className="input input-bordered w-full"
           required

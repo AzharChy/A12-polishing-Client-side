@@ -33,6 +33,10 @@ import PaymentForm from "./Pages/Dashboard/Customer Route/PaymentForm";
 import PaymentStatus from "./Pages/Dashboard/Customer Route/PaymentStatus";
 import ClaimRequest from "./Pages/Dashboard/Customer Route/ClaimRequest";
 import PolicyClearance from "./Pages/Dashboard/Agent Paths/PolicyClearance";
+import AdminOrAgentRoute from "./Pages/Dashboard/Admin and agent route/AdminAndAgentRoute";
+
+import AllBlogs from "./Pages/Blogs";
+import BlogDetails from "./Pages/FAQ/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: 'allPolicy',
        element: <AllPolicy></AllPolicy>
+      },
+      {
+        path: 'blogs',
+       element: <AllBlogs />
+      },
+      {
+        path: '/blogs/:id',
+      element: <BlogDetails /> // replace with your actual component
       },
       {
           path: 'agents',
@@ -139,9 +151,10 @@ export const router = createBrowserRouter([
     },
     {
       path: 'postBlogs',
-      element: <AgentRoute>
-       <PostBlogs />
-      </AgentRoute>
+      
+      element: <AdminOrAgentRoute>
+        <PostBlogs />
+      </AdminOrAgentRoute>
     },
     {
       path: 'policyClearance',
@@ -151,9 +164,9 @@ export const router = createBrowserRouter([
     },
     {
       path: 'manageBlogs',
-      element: <AgentRoute>
-      <ManageBlogs />
-      </AgentRoute>
+      element: <AdminOrAgentRoute>
+         <ManageBlogs />
+      </AdminOrAgentRoute>
     },
     {
       path: 'myPolicies',

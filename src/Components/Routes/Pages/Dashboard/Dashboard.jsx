@@ -69,6 +69,19 @@ const Dashboard = () => {
           >
             Manage Transactions
           </NavLink>
+          
+        </li>
+
+        <li>
+          <NavLink to="/dashboard/postBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+            Post Blogs
+          </NavLink>
+        </li>
+
+         <li>
+          <NavLink to="/dashboard/manageBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+            Manage Blogs
+          </NavLink>
         </li>
       </>
     )}
