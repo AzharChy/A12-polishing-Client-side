@@ -92,6 +92,16 @@ const Dashboard = () => {
         </li>
       </>
     )}
+
+   {role === 'user' && (
+    <>
+     <li>
+          <NavLink to="/dashboard/myPolicies" className="block py-2 px-4 rounded hover:bg-violet-600">
+            My Policies
+          </NavLink>
+          </li>
+    </>
+   )}
   </ul>
 );
 
@@ -110,9 +120,9 @@ const Dashboard = () => {
 
       {/* Sidebar */}
       <aside
-        className={`bg-violet-700 text-black w-64 mt-3 p-4 space-y-4 md:block ${
-          isOpen ? 'block' : 'hidden'
-        } fixed md:relative z-30 h-full`}
+        className={`bg-violet-700 text-white text-bold mt-4 w-64 p-4 space-y-4 z-30 h-screen
+    ${isOpen ? 'block' : 'hidden'} 
+    fixed md:sticky top-0 md:block`}
       >
         <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
         {/* <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">

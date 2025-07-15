@@ -56,7 +56,7 @@ const PostBlog = () => {
 
   try {
     const res = await axiosSecure.post('/blogs', blogData);
-    
+    console.log(res.data)
       await Swal.fire('Success', 'Blog published!', 'success');
       navigate('/dashboard/manageBlogs');
     

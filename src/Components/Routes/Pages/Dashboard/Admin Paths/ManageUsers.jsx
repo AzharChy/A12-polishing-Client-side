@@ -30,7 +30,8 @@ const ManageUsers = () => {
         refetch();
       }
     } catch (err) {
-      Swal.fire('Error', 'Failed to update role', 'error');
+      
+      Swal.fire('Error', 'Failed to update role', 'error',err);
     }
   };
 
@@ -51,7 +52,7 @@ const ManageUsers = () => {
           refetch();
         }
       } catch (err) {
-        Swal.fire('Error', 'Failed to delete user', 'error');
+        Swal.fire('Error', 'Failed to delete user', 'error',err);
       }
     }
   };
@@ -108,7 +109,7 @@ const ManageUsers = () => {
                   </td>
                   <td className="p-3 capitalize">{user.role || 'user'}</td>
                   <td className="p-3">
-                    {new Date(user.createdAt).toLocaleDateString()}
+                    {new Date(user.created_at).toLocaleDateString()}
                   </td>
                   <td className="p-3">
                     <div className="flex flex-wrap gap-2">

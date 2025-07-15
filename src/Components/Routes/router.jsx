@@ -27,6 +27,8 @@ import AgentRoute from "./Pages/Dashboard/Admin and agent route/AgentRoute";
 import AssignedCustomers from "./Pages/Dashboard/Agent Paths/AssignedCustomers";
 import PostBlogs from "./Pages/Dashboard/Agent Paths/PostBlogs";
 import ManageBlogs from "./Pages/Dashboard/Agent Paths/ManageBlogs";
+import CustomerRoute from "./Pages/Dashboard/Customer Route/CustomerRoute";
+import MyPolicies from "./Pages/Dashboard/Customer Route/MyPolicies";
 
 export const router = createBrowserRouter([
   {
@@ -142,6 +144,12 @@ export const router = createBrowserRouter([
       element: <AgentRoute>
       <ManageBlogs />
       </AgentRoute>
+    },
+    {
+      path: 'myPolicies',
+      element: <CustomerRoute>
+        <MyPolicies />
+      </CustomerRoute>
     },
     ]
   }

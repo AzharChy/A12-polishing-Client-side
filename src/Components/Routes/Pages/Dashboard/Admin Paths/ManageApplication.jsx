@@ -126,12 +126,16 @@ const ManageApplication = () => {
                   >
                     <FaEye />
                   </button>
-                  <button
-                    onClick={() => handleStatusChange(app._id, 'approved')}
-                    className="px-2 py-1 bg-green-400 text-xs rounded"
-                  >
-                    Accept
-                  </button>
+                 <button
+  onClick={() => handleStatusChange(app._id, 'approved')}
+  className={`px-2 py-1 text-xs rounded ${
+    app.status === 'approved' ? 'bg-green-300 cursor-not-allowed' : 'bg-green-400'
+  }`}
+  disabled={app.status === 'approved'}
+>
+  Accept
+</button>
+
                   <button
                     onClick={() => handleStatusChange(app._id, 'rejected')}
                     className="px-2 py-1 bg-red-400 text-xs rounded"

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
+import Swal from 'sweetalert2';
 
 const Apply = () => {
   const { quoteId } = useParams();
@@ -25,8 +26,10 @@ const Apply = () => {
     fullName: '',
     address: '',
     phone: '',
+    nid:'',
     nomineeName: '',
     nomineeRelation: '',
+    nomineeNID:''
   });
 
   const handleChange = e => {
@@ -48,7 +51,7 @@ const Apply = () => {
 
       // 2. Increase totalCount in related policy
      await axiosSecure.patch(`/policies/increment/${quote.policyId}`);
-
+     Swal.fire('Your Application has been submitted');
 
     //   navigate('/dashboard/my-applications'); // Or anywhere you want
     } catch (err) {
@@ -95,6 +98,15 @@ const Apply = () => {
           className="input input-bordered w-full"
           required
         />
+        <input
+          type="text"
+          name="nid"
+          placeholder="NID"
+          value={formData.nid}
+          onChange={handleChange}
+          className="input input-bordered w-full"
+          required
+        />
 
         <input
           type="tel"
@@ -121,6 +133,15 @@ const Apply = () => {
           name="nomineeRelation"
           placeholder="Nominee Relation"
           value={formData.nomineeRelation}
+          onChange={handleChange}
+          className="input input-bordered w-full"
+          required
+        />
+        <input
+          type="text"
+          name="nomineeNID"
+          placeholder="Nominee NID"
+          value={formData.nomineeNID}
           onChange={handleChange}
           className="input input-bordered w-full"
           required
