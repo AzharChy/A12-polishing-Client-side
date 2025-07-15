@@ -4,6 +4,8 @@ import Banner from '../../HomeComponents/Banner';
 import PopularPolicies from '../../HomeComponents/PopularPolicies';
 import ReviewCarousel from '../../HomeComponents/ReviewCarousel';
 import LatestBlogs from '../../HomeComponents/LatestBlogs';
+import Newsletter from '../../HomeComponents/Newsletter';
+import MeetOurAgents from '../../HomeComponents/MeetOurAgents';
 
 const HomeLayout = () => {
     return (
@@ -21,6 +23,12 @@ const HomeLayout = () => {
         {/* blogs */}
 
         <LatestBlogs />
+
+        {/* nwesletter subscription section */}
+
+        <Newsletter />
+
+        <MeetOurAgents />
         </div>
     );
 };
