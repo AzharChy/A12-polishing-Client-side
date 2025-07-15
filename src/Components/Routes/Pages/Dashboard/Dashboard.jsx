@@ -90,6 +90,11 @@ const Dashboard = () => {
             Manage Blogs
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/dashboard/policyClearance" className="block py-2 px-4 rounded hover:bg-violet-600">
+           Policy Clearance
+          </NavLink>
+        </li>
       </>
     )}
 
@@ -100,6 +105,17 @@ const Dashboard = () => {
             My Policies
           </NavLink>
           </li>
+     <li>
+          <NavLink to="/dashboard/paymentStatus" className="block py-2 px-4 rounded hover:bg-violet-600">
+          Payment Status
+          </NavLink>
+          </li>
+     <li>
+          <NavLink to="/dashboard/claimRequest" className="block py-2 px-4 rounded hover:bg-violet-600">
+         Claim request
+          </NavLink>
+          </li>
+     
     </>
    )}
   </ul>

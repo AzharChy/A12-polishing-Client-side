@@ -4,8 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
 import Swal from 'sweetalert2';
+import useAuth from '../../../../../customHooks/useAuth';
 
 const Apply = () => {
+  const {user} = useAuth();
+
   const { quoteId } = useParams();
   const [healthIssues, setHealthIssues] = useState([]);
   const navigate = useNavigate();
@@ -24,6 +27,7 @@ const Apply = () => {
 
   const [formData, setFormData] = useState({
     fullName: '',
+    email:'user.email',
     address: '',
     phone: '',
     nid:'',
@@ -46,14 +50,16 @@ const Apply = () => {
       const updateQuote = await axiosSecure.patch(`/quotes/${quoteId}`, {
         ...formData,
         appliedAt: new Date(),
-         status: 'pending'
+         status: 'pending',
+         paymentStatus: 'not paid yet',
+         
       });
 
       // 2. Increase totalCount in related policy
      await axiosSecure.patch(`/policies/increment/${quote.policyId}`);
      Swal.fire('Your Application has been submitted');
 
-    //   navigate('/dashboard/my-applications'); // Or anywhere you want
+      navigate('/dashboard/myPolicies');
     } catch (err) {
       console.error('Application error:', err);
     } finally {
@@ -84,6 +90,15 @@ const Apply = () => {
           name="fullName"
           placeholder="Full Name"
           value={formData.fullName}
+          onChange={handleChange}
+          className="input input-bordered w-full"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={user.email}
           onChange={handleChange}
           className="input input-bordered w-full"
           required

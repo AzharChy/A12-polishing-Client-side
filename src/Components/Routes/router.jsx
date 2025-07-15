@@ -29,6 +29,10 @@ import PostBlogs from "./Pages/Dashboard/Agent Paths/PostBlogs";
 import ManageBlogs from "./Pages/Dashboard/Agent Paths/ManageBlogs";
 import CustomerRoute from "./Pages/Dashboard/Customer Route/CustomerRoute";
 import MyPolicies from "./Pages/Dashboard/Customer Route/MyPolicies";
+import PaymentForm from "./Pages/Dashboard/Customer Route/PaymentForm";
+import PaymentStatus from "./Pages/Dashboard/Customer Route/PaymentStatus";
+import ClaimRequest from "./Pages/Dashboard/Customer Route/ClaimRequest";
+import PolicyClearance from "./Pages/Dashboard/Agent Paths/PolicyClearance";
 
 export const router = createBrowserRouter([
   {
@@ -140,6 +144,12 @@ export const router = createBrowserRouter([
       </AgentRoute>
     },
     {
+      path: 'policyClearance',
+      element: <AgentRoute>
+       <PolicyClearance />
+      </AgentRoute>
+    },
+    {
       path: 'manageBlogs',
       element: <AgentRoute>
       <ManageBlogs />
@@ -149,6 +159,24 @@ export const router = createBrowserRouter([
       path: 'myPolicies',
       element: <CustomerRoute>
         <MyPolicies />
+      </CustomerRoute>
+    },
+    {
+      path: 'paymentForm',
+      element: <CustomerRoute>
+        <PaymentForm />
+      </CustomerRoute>
+    },
+    {
+      path: 'paymentStatus',
+      element: <CustomerRoute>
+        <PaymentStatus />
+      </CustomerRoute>
+    },
+    {
+      path: 'claimRequest',
+      element: <CustomerRoute>
+        <ClaimRequest />
       </CustomerRoute>
     },
     ]

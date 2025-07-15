@@ -10,19 +10,25 @@ import { HelmetProvider } from 'react-helmet-async';
 import AuthProvider from './Components/Routes/Pages/Authentication/AuthProvider/AuthProvider.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 const queryClient = new QueryClient();
 <Toaster position='top-right' reverseOrder={false}></Toaster>
+
+const stripePromiese = loadStripe(import.meta.env.VITE_STRIPE_SECRET_KEY)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
      <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-   <AuthProvider>
+   <Elements stripe={stripePromiese}>
+    <AuthProvider>
     <div className='max-w-7xl m-auto'>
     <RouterProvider router={router} />
    </div>
    </AuthProvider>
+   </Elements>
   </QueryClientProvider>
 
 
