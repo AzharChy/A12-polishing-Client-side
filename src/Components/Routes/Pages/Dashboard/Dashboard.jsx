@@ -6,14 +6,95 @@ import Navbar from '../../../sharedFiles/Navbar';
 
 import Loading from '../Loading';
 
-import AdminSidebar from './sidebar';
-import AgentSidebar from './AgentSidebar';
+// import AdminSidebar from './sidebar';
+// import AgentSidebar from './AgentSidebar';
 import useUserRole from '../../../../customHooks/UserRole';
 
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { role, isLoading } = useUserRole();
+
+  
+ const links = (
+  <ul>
+    <li>
+      <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">
+        Home
+      </NavLink>
+    </li>
+
+    {role === 'admin' && (
+      <>
+        <li>
+          <NavLink
+            to="/dashboard/applications"
+            className="block py-2 px-4 rounded hover:bg-violet-600"
+          >
+            Manage Applications
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/dashboard/manageUsers"
+            className="block py-2 px-4 rounded hover:bg-violet-600"
+          >
+            Manage Users
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/dashboard/managePolicies"
+            className="block py-2 px-4 rounded hover:bg-violet-600"
+          >
+            Manage Policies
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/dashboard/manageAgents"
+            className="block py-2 px-4 rounded hover:bg-violet-600"
+          >
+            Manage Agents
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to="/dashboard/manageTransactions"
+            className="block py-2 px-4 rounded hover:bg-violet-600"
+          >
+            Manage Transactions
+          </NavLink>
+        </li>
+      </>
+    )}
+
+    {role === 'agent' && (
+      <>
+        <li>
+          <NavLink to="/dashboard/assignedCustomers" className="block py-2 px-4 rounded hover:bg-violet-600">
+            Assigned Customers
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard/postBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+            Post Blogs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard/manageBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+            Manage Blogs
+          </NavLink>
+        </li>
+      </>
+    )}
+  </ul>
+);
+
 
     if (isLoading) return <Loading></Loading>
   // Close sidebar on overlay click
@@ -34,12 +115,13 @@ const Dashboard = () => {
         } fixed md:relative z-30 h-full`}
       >
         <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
-        <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">
+        {/* <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">
           Home
-        </NavLink>
+        </NavLink> */}
 
-      <AdminSidebar></AdminSidebar>
-      <AgentSidebar />
+      {/* <AdminSidebar></AdminSidebar> */}
+      {/* <AgentSidebar /> */}
+      {links}
 
       </aside>
 
