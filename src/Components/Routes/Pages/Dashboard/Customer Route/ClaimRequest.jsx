@@ -69,14 +69,14 @@ const ClaimRequest = () => {
                   Approved
                 </button>
               ) : quote.status === 'pending' ? (
-                <span className="ml-2 text-yellow-600 font-semibold">Pending</span>
+                <span className="ml-2 text-yellow-600 font-semibold">Claimed</span>
               ) : (
-                <span className="ml-2 text-gray-500"> Claimed</span>
+                <span className="ml-2 text-gray-500"> Pending</span>
               )}
             </p>
 
             {/* Conditional Claim Form */}
-            {!quote.status && (
+            {quote.status === 'approved' && (
               <form
                 className="space-y-4"
                 onSubmit={handleSubmit((data) => handleClaimSubmit(data, quote))}

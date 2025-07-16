@@ -107,19 +107,30 @@ const Register = () => {
           {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
         </div>
 
+        
         {/* Password */}
-        <div>
-          <label className="block mb-1">Password</label>
-          <input
-            type="password"
-            {...register('password', {
-              required: 'Password is required',
-              minLength: { value: 6, message: 'Minimum 6 characters' }
-            })}
-            className="w-full px-4 py-2 border rounded"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-        </div>
+<div>
+  <label className="block mb-1">Password</label>
+  <input
+    type="password"
+    {...register('password', {
+      required: 'Password is required',
+      minLength: {
+        value: 6,
+        message: 'Password must be at least 6 characters'
+      },
+      pattern: {
+        value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
+        message: 'Must contain uppercase & lowercase letters'
+      }
+    })}
+    className="w-full px-4 py-2 border rounded"
+  />
+  {errors.password && (
+    <p className="text-red-500 text-sm">{errors.password.message}</p>
+  )}
+</div>
+
 
         {/* Confirm Password */}
         <div>

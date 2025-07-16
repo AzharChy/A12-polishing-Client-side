@@ -11,7 +11,8 @@ const CustomerRoute = ({ children }) => {
 
   if (loading || isLoading) return <Loading />;
 
-  if (user && role === 'user') return children;
+  if (user && role === 'user' ) return children;
+   if (user && role === 'requested-agent' ) return children;
 
   return <Navigate to="/" state={{ from: location }} replace />;
 };

@@ -38,6 +38,10 @@ import AdminOrAgentRoute from "./Pages/Dashboard/Admin and agent route/AdminAndA
 import AllBlogs from "./Pages/Blogs";
 import BlogDetails from "./Pages/FAQ/BlogDetails";
 
+import UserProfile from "../HomeComponents/Profile";
+import Unauthorized from "./Pages/unauth&forbidden/Unauthorized";
+import Forbidden from "./Pages/unauth&forbidden/Forbidden";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +67,12 @@ export const router = createBrowserRouter([
           path: 'agents',
           element: <PrivateRoute>
             <Agents></Agents>
+          </PrivateRoute>
+      },
+      {
+          path: 'profile',
+          element: <PrivateRoute>
+            <UserProfile />
           </PrivateRoute>
       },
       {
@@ -92,6 +102,14 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
            <Apply></Apply>
         </PrivateRoute>
+      },
+      {
+        path: 'unauthorized',
+        element: <Unauthorized />
+      },
+      {
+        path: 'forbidden',
+        element: <Forbidden />
       }
     ]
   },

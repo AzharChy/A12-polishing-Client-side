@@ -6,6 +6,9 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
 import useAuth from '../../../../../customHooks/useAuth';
 import { IoStarSharp } from "react-icons/io5";
+import jsPDF from 'jspdf';
+
+
 
 const MyPolicies = () => {
   const axiosSecure = useAxiosSecure();
@@ -72,6 +75,36 @@ const MyPolicies = () => {
   };
 
   const groupedQuotes = groupByFirstLetter(myQuotes);
+
+  const handleDownloadPolicyPDF = (quote) => {
+  const doc = new jsPDF();
+
+  doc.setFontSize(16);
+  doc.text('Insurance Policy Details', 14, 20);
+
+  doc.setFontSize(12);
+  const userName = user?.fullName || user?.displayName || 'N/A';
+
+  const content = [
+    [`Name`, userName],
+    [`Email`, user?.email],
+    [`Policy Name`, quote.policyName],
+    [`Status`, quote.status],
+    [`Coverage`, quote.coverage],
+    [`Duration`, quote.duration],
+    [`Monthly Premium`, quote.monthlyPremium],
+    [`Annual Premium`, quote.annualPremium],
+    [`Nominee`, quote.nomineeName || 'N/A'],
+    [`Agent Email`, quote.agentEmail || 'N/A'],
+    [`Downloaded On`, new Date().toLocaleDateString()],
+  ];
+
+  content.forEach(([label, value], idx) => {
+    doc.text(`${label}: ${value}`, 14, 30 + idx * 8);
+  });
+
+  doc.save(`${quote.policyName.replace(/\s+/g, '_')}_Policy.pdf`);
+};
 
   return (
     <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
@@ -149,6 +182,15 @@ const MyPolicies = () => {
                         >
                           Review
                         </button>
+                        {quote.status === 'approved' && (
+  <button
+    onClick={() => handleDownloadPolicyPDF(quote)}
+    className="text-green-600 hover:underline text-xs"
+  >
+    Download Policy
+  </button>
+)}
+
                       </div>
                     </td>
                   </tr>
