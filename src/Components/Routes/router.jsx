@@ -55,6 +55,7 @@ export const router = createBrowserRouter([
         path: 'allPolicy',
        element: <AllPolicy></AllPolicy>
       },
+      
       {
         path: 'blogs',
        element: <AllBlogs />

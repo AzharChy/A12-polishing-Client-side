@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../customHooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../customHooks/AxiosSecure';
-
+import logo from '../../assets/logo.png'
 
 
 const Navbar = () => {
@@ -56,9 +56,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between h-16">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2 text-xl font-bold text-violet-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-8 h-8">
-            <path d="M27.912 7.289l-10.324-5.961..." />
-          </svg>
+          <img src={logo} className='w-8 h-8'></img>
           InsuranceApp
         </NavLink>
 
