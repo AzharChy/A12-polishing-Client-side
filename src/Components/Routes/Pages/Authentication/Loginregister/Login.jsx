@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
-import useAuth from '../../../../../customHooks/useAuth';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
 import useAxiosSecure from '../../../../../customHooks/AxiosSecure';
-import { auth } from '../../../../../firebase.config';
+import useAuth from '../../../../../customHooks/useAuth';
+import { auth } from '../../../../../../firebase.config';
+
+
+
 
 
 const Login = () => {
