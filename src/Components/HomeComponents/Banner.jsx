@@ -5,9 +5,9 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import slider1 from '../../assets/images.jpeg';
+import slider1 from '../../assets/life-insurance.webp';
 import slider2 from '../../assets/international-travel-insurance.webp';
-import slider3 from '../../assets/life-insurance-for-kids-article-image2-1200x720.jpg';
+import slider3 from '../../assets/five-reasons-why-you-should-buy-a-travel-insurance-online2.webp';
 import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
@@ -26,13 +26,13 @@ const Banner = () => {
     },
     {
       img: slider3,
-      heading: "Protect Their Future Now",
+      heading: "Turn Miles into Memories",
       subheading: "Comprehensive life insurance for your loved ones",
     },
   ];
 
   return (
-    <div className="w-full h-7/12 relative mt-5">
+    <div className="w-full h-1/4 relative mt-5">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 4000 }}
