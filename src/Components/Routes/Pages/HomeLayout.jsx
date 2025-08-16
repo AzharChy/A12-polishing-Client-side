@@ -7,6 +7,7 @@ import LatestBlogs from '../../HomeComponents/LatestBlogs';
 import Newsletter from '../../HomeComponents/Newsletter';
 import MeetOurAgents from '../../HomeComponents/MeetOurAgents';
 import OurPartners from '../../HomeComponents/OurPartners';
+import OurAdvisors from './OurAdvisors';
 
 const HomeLayout = () => {
     return (
@@ -33,6 +34,8 @@ const HomeLayout = () => {
 
 
         <OurPartners />
+
+        <OurAdvisors />
         </div>
     );
 };
