@@ -4,6 +4,7 @@ import useAuth from '../../customHooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../customHooks/AxiosSecure';
 import logo from '../../assets/logo.png'
+import Themetoggle from '../../customHooks/Themetoggle';
 
 
 const Navbar = () => {
@@ -63,13 +64,45 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li><NavLink to="/" className="px-4 py-2 rounded hover:bg-violet-100">Home</NavLink></li>
-      <li><NavLink to="/allPolicy" className="px-4 py-2 rounded hover:bg-violet-100">All Policies</NavLink></li>
-      <li><NavLink to="/agents" className="px-4 py-2 rounded hover:bg-violet-100">Agents</NavLink></li>
-      <li><NavLink to="/FAQ" className="px-4 py-2 rounded hover:bg-violet-100">FAQ</NavLink></li>
+      <li><NavLink to="/" className={({ isActive }) =>
+    `px-4 py-2 rounded transition-colors duration-200 ${
+      isActive
+        ? "bg-violet-600 text-white dark:bg-violet-500"
+        : "hover:bg-violet-100 dark:hover:bg-gray-700"
+    }`
+  }>Home</NavLink></li>
+      <li><NavLink to="/allPolicy" className={({ isActive }) =>
+    `px-4 py-2 rounded transition-colors duration-200 ${
+      isActive
+        ? "bg-violet-600 text-white dark:bg-violet-500"
+        : "hover:bg-violet-100 dark:hover:bg-gray-700"
+    }`
+  }>All Policies</NavLink></li>
+      <li><NavLink to="/agents" className={({ isActive }) =>
+    `px-4 py-2 rounded transition-colors duration-200 ${
+      isActive
+        ? "bg-violet-600 text-white dark:bg-violet-500"
+        : "hover:bg-violet-100 dark:hover:bg-gray-700"
+    }`
+  }>Agents</NavLink></li>
+      <li><NavLink to="/FAQ"className={({ isActive }) =>
+    `px-4 py-2 rounded transition-colors duration-200 ${
+      isActive
+        ? "bg-violet-600 text-white dark:bg-violet-500"
+        : "hover:bg-violet-100 dark:hover:bg-gray-700"
+    }`
+  }>FAQ</NavLink></li>
+      
    {user && 
-      <li><NavLink to="/dashboard" className="px-4 py-2 rounded hover:bg-violet-100">Dashboard</NavLink></li>
+      <li><NavLink to="/dashboard" className={({ isActive }) =>
+    `px-4 py-2 rounded transition-colors duration-200 ${
+      isActive
+        ? "bg-violet-600 text-white dark:bg-violet-500"
+        : "hover:bg-violet-100 dark:hover:bg-gray-700"
+    }`
+  }>Dashboard</NavLink></li>
       }
+     
     </>
   );
 

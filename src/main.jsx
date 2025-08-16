@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
    <Elements stripe={stripePromiese}>
     <AuthProvider>
-    <div className='max-w-7xl m-auto bg-base-100'>
+    <div className=' m-auto bg-base-100'>
     <RouterProvider router={router} />
    </div>
    </AuthProvider>

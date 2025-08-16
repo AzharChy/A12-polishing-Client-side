@@ -32,7 +32,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="w-full h-1/4 relative mt-5">
+    <div className="w-full h-1/4 relative mt-5 px-10">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 4000 }}
