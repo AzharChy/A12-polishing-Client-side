@@ -41,6 +41,7 @@ import BlogDetails from "./Pages/FAQ/BlogDetails";
 import UserProfile from "../HomeComponents/Profile";
 import Unauthorized from "./Pages/unauth&forbidden/Unauthorized";
 import Forbidden from "./Pages/unauth&forbidden/Forbidden";
+import Errorpage from "../HomeComponents/Errorpage";
 
 export const router = createBrowserRouter([
   {
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
       {
         path: 'forbidden',
         element: <Forbidden />
+      },
+      {
+        path: '*',
+        element: <Errorpage />
       }
     ]
   },
