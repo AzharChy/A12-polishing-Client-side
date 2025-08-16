@@ -14,6 +14,28 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+  // ✅ NEW: navbar visibility state
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0); 
+
+   // ✅ Scroll handler
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // scrolling down
+        setShowNavbar(false);
+      } else {
+        // scrolling up
+        setShowNavbar(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+
   // Fetch user from your backend
   useEffect(() => {
     if (user?.email) {
@@ -52,7 +74,10 @@ const Navbar = () => {
   );
 
   return (
-    <header className="p-4 bg-white dark:bg-gray-900 dark:text-gray-100 shadow-md">
+   <header
+      className={`p-4 bg-white dark:bg-gray-900 dark:text-gray-100 shadow-md sticky top-0 left-0 z-50 
+        transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}
+    >
       <div className="container mx-auto flex items-center justify-between h-16">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2 text-xl font-bold text-violet-600">
