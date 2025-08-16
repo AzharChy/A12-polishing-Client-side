@@ -30,7 +30,7 @@ const PopularPolicies = () => {
           >
             <div className="p-6">
               {/* Policy Title */}
-              <h3 className="text-2xl font-extrabold text-gray-800 mb-4 leading-tight">
+              <h3 className="text-[20px] font-extrabold text-gray-800 mb-4 leading-tight">
                 {policy.title}
               </h3>
 
