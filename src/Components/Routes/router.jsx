@@ -119,11 +119,11 @@ export const router = createBrowserRouter([
   element: 
   <PrivateRoute>
     <Dashboard />,
-    // </PrivateRoute>,
+     </PrivateRoute>,
   children: [
     {
       index: true, 
-      element: <DashboardHome />
+      element: <UserProfile />
     },
     {
       path: 'applications',

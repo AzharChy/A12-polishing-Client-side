@@ -14,13 +14,21 @@ import useUserRole from '../../../../customHooks/UserRole';
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { role, isLoading } = useUserRole();
+  
+
+
+  if (isLoading) return <Loading />;
 
   
  const links = (
   <ul>
     <li>
-      <NavLink to="/dashboard" className="block py-2 px-4 rounded hover:bg-violet-600">
-        Home
+      <NavLink to="/dashboard" end className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
+       My Profile
       </NavLink>
     </li>
 
@@ -29,7 +37,11 @@ const Dashboard = () => {
         <li>
           <NavLink
             to="/dashboard/applications"
-            className="block py-2 px-4 rounded hover:bg-violet-600"
+            className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }
           >
             Manage Applications
           </NavLink>
@@ -38,7 +50,11 @@ const Dashboard = () => {
         <li>
           <NavLink
             to="/dashboard/manageUsers"
-            className="block py-2 px-4 rounded hover:bg-violet-600"
+             className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }
           >
             Manage Users
           </NavLink>
@@ -47,7 +63,11 @@ const Dashboard = () => {
         <li>
           <NavLink
             to="/dashboard/managePolicies"
-            className="block py-2 px-4 rounded hover:bg-violet-600"
+             className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }
           >
             Manage Policies
           </NavLink>
@@ -56,7 +76,11 @@ const Dashboard = () => {
         <li>
           <NavLink
             to="/dashboard/manageAgents"
-            className="block py-2 px-4 rounded hover:bg-violet-600"
+             className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }
           >
             Manage Agents
           </NavLink>
@@ -65,7 +89,11 @@ const Dashboard = () => {
         <li>
           <NavLink
             to="/dashboard/manageTransactions"
-            className="block py-2 px-4 rounded hover:bg-violet-600"
+             className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }
           >
             Manage Transactions
           </NavLink>
@@ -73,13 +101,21 @@ const Dashboard = () => {
         </li>
 
         <li>
-          <NavLink to="/dashboard/postBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/postBlogs"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             Post Blogs
           </NavLink>
         </li>
 
          <li>
-          <NavLink to="/dashboard/manageBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/manageBlogs"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             Manage Blogs
           </NavLink>
         </li>
@@ -89,22 +125,38 @@ const Dashboard = () => {
     {role === 'agent' && (
       <>
         <li>
-          <NavLink to="/dashboard/assignedCustomers" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/assignedCustomers"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             Assigned Customers
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/postBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/postBlogs"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             Post Blogs
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/manageBlogs" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/manageBlogs"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             Manage Blogs
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/policyClearance" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/policyClearance"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
            Policy Clearance
           </NavLink>
         </li>
@@ -114,17 +166,29 @@ const Dashboard = () => {
    {role === 'user'  && (
     <>
      <li>
-          <NavLink to="/dashboard/myPolicies" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/myPolicies" className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             My Policies
           </NavLink>
           </li>
      <li>
-          <NavLink to="/dashboard/paymentStatus" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/paymentStatus"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
           Payment Status
           </NavLink>
           </li>
      <li>
-          <NavLink to="/dashboard/claimRequest" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/claimRequest"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
          Claim request
           </NavLink>
           </li>
@@ -135,17 +199,29 @@ const Dashboard = () => {
    {role === 'requested-agent'  && (
     <>
      <li>
-          <NavLink to="/dashboard/myPolicies" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/myPolicies"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
             My Policies
           </NavLink>
           </li>
      <li>
-          <NavLink to="/dashboard/paymentStatus" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/paymentStatus"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
           Payment Status
           </NavLink>
           </li>
      <li>
-          <NavLink to="/dashboard/claimRequest" className="block py-2 px-4 rounded hover:bg-violet-600">
+          <NavLink to="/dashboard/claimRequest"  className={({ isActive }) =>
+    `block py-2 px-4 rounded ${
+      isActive ? "bg-violet-900 text-white" : "hover:bg-violet-600"
+    }`
+  }>
          Claim request
           </NavLink>
           </li>
